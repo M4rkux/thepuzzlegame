@@ -5,3 +5,11 @@
 body {
   @apply bg-stone-900 text-stone-50;
 }
+
+a {
+  @apply text-red-800;
+  
+  &:hover {
+    @apply text-red-700;
+  }
+}

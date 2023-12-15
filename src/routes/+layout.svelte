@@ -1,6 +1,11 @@
 <script>
   import "../app.scss";
-  export const ssr = false;
 </script>
+
+<svelte:head>
+  <title>
+    The puzzle game
+  </title>
+</svelte:head>
 
 <slot />
