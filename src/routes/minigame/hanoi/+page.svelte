@@ -7,6 +7,7 @@
   ];
   let currentDisk: number = -1;
   let hoverPole: number = 0;
+  const poleElements: HTMLButtonElement[] = [];
 
   function handleClickDisk(poleIndex: number) {
     if (currentDisk < 0) {
@@ -20,12 +21,75 @@
     if (currentDisk > -1 && (!poles[poleIndex].length || currentDisk < poles[poleIndex][0])) {
       poles[poleIndex].unshift(currentDisk);
       currentDisk = -1;
+      poles = poles;
     }
-    poles = poles;
   }
 
   function handleHoverPole(poleIndex: number) {
     hoverPole = poleIndex;
+  }
+
+  function handleKeyPress(e: KeyboardEvent) {
+    const element = document.activeElement;
+    const clickableElements = Array.from(document.querySelectorAll("button:not([disabled])")) as HTMLButtonElement[];
+    if (element?.classList.contains("pole")) {
+      hoverPole = Number(((element as HTMLButtonElement).name));
+    }
+    switch (e.code) {
+      case "ArrowUp":
+        if (currentDisk === -1) {
+          (document.activeElement as HTMLButtonElement).click();
+        }
+        break;
+      case "ArrowRight":
+        focusNext(clickableElements);
+        break;
+      case "ArrowDown":
+        if (currentDisk > -1) {
+          handleClickPole(hoverPole);
+        }
+        break;
+      case "ArrowLeft":
+        focusPrev(clickableElements);
+        break;
+    }
+  }
+
+  function focusNext(clickableElements: HTMLButtonElement[]) {
+    
+    if (currentDisk > -1) {
+      if (hoverPole < poleElements.length - 1) {
+        hoverPole++;
+      } else {
+        hoverPole = 0;
+      }
+      poleElements[hoverPole].focus();
+    } else {
+      const selectedIndex = clickableElements.indexOf(document.activeElement as HTMLButtonElement);
+      if (selectedIndex < clickableElements.length - 1) {
+        clickableElements[selectedIndex + 1].focus();
+      } else {
+        clickableElements[0].focus();
+      }
+    }
+  }
+
+  function focusPrev(clickableElements: HTMLButtonElement[]) {
+    if (currentDisk > -1) {
+      if (hoverPole > 0) {
+        hoverPole--;
+      } else {
+        hoverPole = poleElements.length - 1;
+      }
+      poleElements[hoverPole].focus();
+    } else {
+      const selectedIndex = clickableElements.indexOf(document.activeElement as HTMLButtonElement);
+      if (selectedIndex > 0) {
+        clickableElements[selectedIndex - 1].focus();
+      } else {
+        clickableElements[clickableElements.length - 1].focus();
+      }
+    }
   }
 </script>
 
@@ -37,16 +101,18 @@
       </div>
     {/if}
     {#each poles as poleDisks, poleIndex}
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div class="flex flex-col justify-end items-center w-[230px] h-[230px] border-b-2 border-black pt-4 px-auto relative" on:mouseenter={() => handleHoverPole(poleIndex)}>
-        <button class="pole {poleIndex === poles.length - 1 && 'pole-goal'} {currentDisk > -1 && 'clickable'}" on:click={() => handleClickPole(poleIndex)} />
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div class="flex flex-col justify-end items-center w-[230px] h-[230px] border-b-2 border-black pt-4 px-auto relative" on:mouseenter={() => handleHoverPole(poleIndex)}>
+        <button class="pole {poleIndex === poles.length - 1 && 'pole-goal'} {currentDisk > -1 && 'clickable'}" name={`${poleIndex}`} disabled={currentDisk === -1} on:click={() => handleClickPole(poleIndex)} bind:this={poleElements[poleIndex]} />
         {#each poleDisks as disk, i}
-          <button class="disk disk-{disk} {currentDisk === -1 && i === 0 && 'clickable'}" on:click={() => handleClickDisk(poleIndex)} />
+          <button class="disk disk-{disk} {currentDisk === -1 && i === 0 && 'clickable'}" disabled={currentDisk > -1 || i > 0} on:click={() => handleClickDisk(poleIndex)} />
         {/each}
       </div>
     {/each}
   </div>
 </div>
+
+<svelte:window on:keyup={handleKeyPress} />
 
 <style lang="scss">
   .disk {
@@ -106,20 +172,24 @@
   .clickable {
     @apply cursor-pointer;
 
-    &.disk:hover {
-      @apply -translate-y-px rotate-3;
+    &:hover, &:active {
+      @apply shadow-sky-100;
     }
 
-    &.pole:hover {
-      @apply shadow-[0_-3px_2px_2px];
+    &.disk {
+      &:hover {
+        @apply shadow-[0_0_2px_2px] -translate-y-px rotate-3;
+      }
+
+      &:active {
+        @apply shadow-[0_0_2px_1px];
+      }
     }
 
-    &:hover {
-      @apply shadow-[0_0_2px_2px] shadow-sky-100;
-    }
-
-    &:active {
-      @apply shadow-[0_0_2px_1px] shadow-sky-100;
+    &.pole {
+      &:hover, &:active, &:focus {
+        @apply shadow-[0_-3px_2px_2px];
+      }
     }
   }
 </style>
