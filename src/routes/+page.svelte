@@ -1,3 +1,14 @@
+<script lang="ts">
+  let isFullScreen = false;
+  function handleToggleFullScreen() {
+    if (isFullScreen) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+</script>
+
 <div class="flex w-full">
   <div class="m-auto">
     <h1 class="text-2xl">Welcome to the puzzle game</h1>
@@ -18,6 +29,7 @@
       <li>Salvar o progresso em local storage</li>
       <li>Botão para compartilhar a tela de vitória</li>
       <li>Criar tradução EN/PT</li>
+      <li><label><input type="checkbox" bind:checked={isFullScreen} on:change={handleToggleFullScreen} /> Full screen</label></li>
     </ul>
   </div>
 </div>
