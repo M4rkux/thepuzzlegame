@@ -1,3 +1,11 @@
-<a href="/">Voltar</a>
+<div class="content">
+  <a href="/">Voltar</a>
+  
+  <slot />
+</div>
 
-<slot />
+<style lang="scss">
+  .content {
+    @apply p-4;
+  }
+</style>
