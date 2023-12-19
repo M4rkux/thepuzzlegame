@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { onMount } from "svelte";
 
   interface Commands {
@@ -11,7 +12,8 @@
     "birthday": birthdayCommand,
     "pizzatime": pizzatimeommand,
     "clear": clearCommand,
-    "solve": solveCommand
+    "solve": solveCommand,
+    "exit": exitCommand
   };
   const birthDate = new Date("1992-01-15T00:00:00");
   const password = "pizza1992";
@@ -42,6 +44,7 @@
       <li><span class="font-semibold text-yellow-100">pizzatime</span> <span class="italic">It's pizza time!</span></li>
       <li><span class="font-semibold text-yellow-100">clear</span> <span class="italic">para limpar os dados do console</span></li>
       <li><span class="font-semibold text-yellow-100">solve</span> <span class="italic">para resolver o puzzle</span></li>
+      <li><span class="font-semibold text-yellow-100">exit</span> <span class="italic">para sair do console</span></li>
     </ul>
     `);
   }
@@ -86,6 +89,13 @@
     isSolving = true;
   }
 
+  function exitCommand() {
+    addConsoleHistory(`Exiting...`);
+    setTimeout(() => {
+      goto("/");
+    }, 500);
+  }
+
   function addConsoleHistory(text: string = "") {
     consoleHistory = [...consoleHistory, `${!isSolving ? `<span class="mt-2 block">$ <span class="text-yellow-200 font-semibold">${command}</span></span>` : ""}${text}`];
   }
@@ -128,6 +138,14 @@
         runCommand();
         command = "";
         indexHistory = -1;
+        break;
+      case "c":
+        if (e.ctrlKey) {
+          addConsoleHistory(isSolving ? "password:" : "");
+          isSolving = false;
+          command = "";
+          indexHistory = -1;
+        }
         break;
     }
   }
