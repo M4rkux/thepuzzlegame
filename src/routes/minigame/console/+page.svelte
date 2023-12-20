@@ -192,7 +192,7 @@
 <p>
 	Você precisa digitar o comando correto para desbloquear o nível, tente digitar <b>help</b> para ver a lista de comandos.
 </p>
-<p>Você também pode utilizar o console para realizar operações aritiméticas.</p>
+<p>Você também pode utilizar o console para realizar operações aritméticas.</p>
 <div class="mt-4 rounded-sm bg-gray-700 p-1 font-mono border-b-2 border-gray-500">
 	<div class="flex flex-col justify-end min-h-[200px]">
 		{#each consoleHistory as text}
