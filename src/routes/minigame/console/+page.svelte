@@ -18,6 +18,7 @@
 	};
 	const birthDate = new Date("1992-01-15T00:00:00");
 	const password = "pizza1992";
+	const maxHistory = 100;
 
 	let consoleHistory: string[] = [];
 	let commandHistory: string[] = [];
@@ -123,6 +124,9 @@
 	}
 
 	function addConsoleHistory(text: string = "") {
+		if (consoleHistory.length === maxHistory) {
+			consoleHistory.pop();
+		}
 		consoleHistory = [
 			...consoleHistory,
 			`${
@@ -184,6 +188,9 @@
 			case "Enter":
 				command = command.replaceAll(/<[^>]*>/g, "");
 				if (!isSolving) {
+					if (commandHistory.length === maxHistory) {
+						commandHistory.pop();
+					}
 					commandHistory = [command, ...commandHistory];
 				}
 				runCommand();
