@@ -210,32 +210,39 @@
 	}
 </script>
 
-<h1 class="text-2xl text-center">Console</h1>
-<p>
-	Você precisa digitar o comando correto para desbloquear o nível, tente digitar <span class="font-bold text-yellow-100">help</span> para ver a lista de comandos.
-</p>
-<p>Você também pode utilizar o console para realizar operações aritméticas.</p>
-<div class="mt-4 rounded-sm bg-gray-700 p-1 font-mono border-b-2 border-gray-500">
-	<div class="flex flex-col justify-end min-h-[200px]">
-		{#each consoleHistory as text}
-			<p>{@html text}</p>
-		{/each}
-	</div>
-	<div class="flex mt-1">
-		<span class="mr-1 whitespace-nowrap">$ {isSolving ? " password:" : ""}</span>
-		<div class="relative w-full">
-			<input
-				type="text"
-				bind:value={command}
-				class="bg-transparent caret-white border-transparent outline-0 absolute w-full text-transparent"
-				bind:this={commandElement}
-				on:keydown={handleInput}
-				autocomplete="off"
-				autocorrect="off"
-				autocapitalize="off"
-				spellcheck="false"
-			/>
-			<span class="absolute">{@html commandHighlighted()}</span>
+<div class="container mx-auto">
+	<div class="p-4 flex flex-col items-center">
+
+		<h1 class="mb-4">Console</h1>
+		<div class="text-left">
+			<p>
+				Você precisa digitar o comando correto para desbloquear o nível, tente digitar <span class="font-bold text-yellow-100">help</span> para ver a lista de comandos.
+			</p>
+			<p>Você também pode utilizar o console para realizar operações aritméticas.</p>
+		</div>
+		<div class="mt-4 rounded-sm bg-gray-700 p-1 font-mono border-b-2 border-gray-500 min-w-[480px] w-full">
+			<div class="flex flex-col justify-end min-h-[200px]">
+				{#each consoleHistory as text}
+					<p>{@html text}</p>
+				{/each}
+			</div>
+			<div class="flex mt-1">
+				<span class="mr-1 whitespace-nowrap">$ {isSolving ? " password:" : ""}</span>
+				<div class="relative w-full">
+					<input
+						type="text"
+						bind:value={command}
+						class="bg-transparent caret-white border-transparent outline-0 absolute w-full text-transparent"
+						bind:this={commandElement}
+						on:keydown={handleInput}
+						autocomplete="off"
+						autocorrect="off"
+						autocapitalize="off"
+						spellcheck="false"
+					/>
+					<span class="absolute">{@html commandHighlighted()}</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

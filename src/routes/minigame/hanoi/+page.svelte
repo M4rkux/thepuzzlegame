@@ -91,37 +91,48 @@
 		}
 	}
 </script>
+<div class="container mx-auto">
+	<div class="p-4 flex flex-col items-center">
 
-<div class="w-full flex">
-	<div class="mx-auto flex flex-row relative">
-		{#if currentDisk > -1}
-			<div class="w-[230px] floating floating-{hoverPole}">
-				<button class="disk disk-{currentDisk} {isGameComplete ? 'golden' : ''}" />
-			</div>
-		{/if}
-		{#each poles as poleDisks, poleIndex}
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<div
-				class="flex flex-col justify-end items-center w-[230px] h-[230px] border-b-2 border-black pt-4 px-auto relative"
-				on:mouseenter={() => handleHoverPole(poleIndex)}
-			>
-				<button
-					class="pole {poleIndex === poles.length - 1 ? 'pole-goal' : ''} {currentDisk > -1 ? 
-						'clickable' : ''}"
-					name={`${poleIndex}`}
-					disabled={isGameComplete || currentDisk === -1}
-					on:click={() => handleClickPole(poleIndex)}
-					bind:this={poleElements[poleIndex]}
-				/>
-				{#each poleDisks as disk, i}
-					<button
-						class="disk disk-{disk} {!isGameComplete && currentDisk === -1 && i === 0 ? 'clickable' : ''} {isGameComplete ? 'golden' : ''}"
-						disabled={isGameComplete || currentDisk > -1 || i > 0}
-						on:click={() => handleClickDisk(poleIndex)}
-					/>
+    <h1 class="mb-4">Travessia</h1>
+    <div class="mx-auto mb-10">
+      <p>Seu objetivo é passar todas as argolas para o último pau da direita.</p>
+      <p>Regras:</p>
+			<p>Só pode mover uma argola por vez</p>
+			<p>A argola só pode ser colocada em cima de outra maior ou em um espaço vazio</p>
+		</div>
+		<div class="w-full flex">
+			<div class="mx-auto flex flex-row relative">
+				{#if currentDisk > -1}
+					<div class="w-[230px] floating floating-{hoverPole}">
+						<button class="disk disk-{currentDisk} {isGameComplete ? 'golden' : ''}" />
+					</div>
+				{/if}
+				{#each poles as poleDisks, poleIndex}
+					<!-- svelte-ignore a11y-no-static-element-interactions -->
+					<div
+						class="flex flex-col justify-end items-center w-[230px] h-[230px] border-b-2 border-black pt-4 px-auto relative"
+						on:mouseenter={() => handleHoverPole(poleIndex)}
+					>
+						<button
+							class="pole {poleIndex === poles.length - 1 ? 'pole-goal' : ''} {currentDisk > -1 ? 
+								'clickable' : ''}"
+							name={`${poleIndex}`}
+							disabled={isGameComplete || currentDisk === -1}
+							on:click={() => handleClickPole(poleIndex)}
+							bind:this={poleElements[poleIndex]}
+						/>
+						{#each poleDisks as disk, i}
+							<button
+								class="disk disk-{disk} {!isGameComplete && currentDisk === -1 && i === 0 ? 'clickable' : ''} {isGameComplete ? 'golden' : ''}"
+								disabled={isGameComplete || currentDisk > -1 || i > 0}
+								on:click={() => handleClickDisk(poleIndex)}
+							/>
+						{/each}
+					</div>
 				{/each}
 			</div>
-		{/each}
+		</div>
 	</div>
 </div>
 

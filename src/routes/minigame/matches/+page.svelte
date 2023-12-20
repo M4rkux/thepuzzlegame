@@ -18,12 +18,23 @@
   }
 </script>
 
+<div class="container mx-auto">
+	<div class="p-4 flex flex-col items-center">
+
+    <h1 class="mb-4">Palitos</h1>
+    <div class="mx-auto mb-10">
+      <p>Seu objetivo é fazer a conta ficar matematicamente correta</p>
+      <p>Você só pode mover 1 único palito</p>
+      <p>Clique em um palito para remover e depois em um espaço vazio para colocar</p>
+    </div>
 <div class="flex flex-row text-9xl items-center gap-4">
   <MatchNumber bind:isGameComplete={isGameComplete} bind:isRemoving={isRemoving} bind:number={number1} />
   <span class="w-[72px] text-center">+</span>
   <MatchNumber bind:isGameComplete={isGameComplete} bind:isRemoving={isRemoving} bind:number={number2} />
   <span class="w-[72px] text-center">=</span>
   <MatchNumber bind:isGameComplete={isGameComplete} bind:isRemoving={isRemoving} bind:number={numberResult} />
+</div>
+</div>
 </div>
 
 <div>
