@@ -10,6 +10,7 @@
 		help: helpCommand,
 		whoami: whoamiCommand,
 		birthday: birthdayCommand,
+		date: dateCommand,
 		pizzatime: pizzatimeommand,
 		clear: clearCommand,
 		solve: solveCommand,
@@ -47,6 +48,7 @@
       <li><span class="font-semibold text-yellow-100">help</span> <span class="italic">para mostrar todos os comandos</span></li>
       <li><span class="font-semibold text-yellow-100">whoami</span> <span class="italic">para mostrar os dados do proprietário</span></li>
       <li><span class="font-semibold text-yellow-100">birthday</span> <span class="italic">para mostrar a data de aniversário</span></li>
+      <li><span class="font-semibold text-yellow-100">date</span> <span class="italic">para mostrar a data de hoje</span></li>
       <li><span class="font-semibold text-yellow-100">pizzatime</span> <span class="italic">It's pizza time!</span></li>
       <li><span class="font-semibold text-yellow-100">clear</span> <span class="italic">para limpar os dados do console</span></li>
       <li><span class="font-semibold text-yellow-100">solve</span> <span class="italic">para resolver o puzzle</span></li>
@@ -85,6 +87,18 @@
 			`Meu aniversário é ${dateFormatter.format(birthDate)}. ${
 				isBirthdayToday ? "<br/>É hoje!!!</b>" : ""
 			}`
+		);
+	}
+
+	function dateCommand() {
+		const dateFormatter = new Intl.DateTimeFormat("pt-BR", {
+			day: "numeric",
+			month: "long",
+			year: "numeric"
+		});
+
+		addConsoleHistory(
+			`Hoje é ${dateFormatter.format(new Date())}`
 		);
 	}
 
@@ -178,7 +192,8 @@
 				break;
 			case "c":
 				if (e.ctrlKey) {
-					addConsoleHistory(isSolving ? "password:" : "");
+					const message = `${isSolving ? "password:" : ""} ${command ? '<small class="text-xs italic">--cancelled--</small>' : ''}`;
+					addConsoleHistory(message);
 					isSolving = false;
 					command = "";
 					indexHistory = -1;
@@ -188,9 +203,9 @@
 	}
 </script>
 
-<h1>Console</h1>
+<h1 class="text-2xl text-center">Console</h1>
 <p>
-	Você precisa digitar o comando correto para desbloquear o nível, tente digitar <b>help</b> para ver a lista de comandos.
+	Você precisa digitar o comando correto para desbloquear o nível, tente digitar <span class="font-bold text-yellow-100">help</span> para ver a lista de comandos.
 </p>
 <p>Você também pode utilizar o console para realizar operações aritméticas.</p>
 <div class="mt-4 rounded-sm bg-gray-700 p-1 font-mono border-b-2 border-gray-500">

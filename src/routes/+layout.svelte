@@ -6,4 +6,12 @@
 	<title>The puzzle game</title>
 </svelte:head>
 
-<slot />
+<div class="content">
+	<slot />
+</div>
+
+<style lang="scss">
+	.content {
+		@apply p-4;
+	}
+</style>
