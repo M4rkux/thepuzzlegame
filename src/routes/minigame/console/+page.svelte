@@ -25,11 +25,13 @@
 	let indexHistory: number = -1;
 	let isSolving = false;
 
+	$: mathExpressionResult = calculateMathExpression(command);
+
 	$: commandHighlighted = () => {
 		return isSolving
 			? "*".repeat(command.length)
 			: `<span class="${
-					command in commands ? "text-green-500" : "text-red-500"
+					(command in commands || mathExpressionResult !== false) ? "text-green-500" : "text-red-500"
 				} font-semibold">${command}</span>`;
 	};
 
@@ -117,6 +119,22 @@
 		];
 	}
 
+	function calculateMathExpression(input: string): number | false {
+		const sanitizedInput = input.replace(/[^-()\d/*+.]/g, '');
+
+		try {
+			const result = eval(sanitizedInput);
+
+			if (typeof result === 'number' && !isNaN(result)) {
+				return result;
+			} else {
+				return false;
+			}
+		} catch (error) {
+			return false;
+		}
+	}
+
 	function runCommand() {
 		if (command in commands) {
 			commands[command]();
@@ -130,7 +148,7 @@
 			}
 			isSolving = false;
 		} else {
-			addConsoleHistory();
+			addConsoleHistory(mathExpressionResult !== false ? mathExpressionResult.toString() : '');
 		}
 	}
 
@@ -172,9 +190,9 @@
 
 <h1>Console</h1>
 <p>
-	Você precisa digitar o comando correto para desbloquear o nível, tente digitar <b>help</b> para obter
-	ajuda.
+	Você precisa digitar o comando correto para desbloquear o nível, tente digitar <b>help</b> para ver a lista de comandos.
 </p>
+<p>Você também pode utilizar o console para realizar operações aritiméticas.</p>
 <div class="mt-4 rounded-sm bg-gray-700 p-1 font-mono border-b-2 border-gray-500">
 	<div class="flex flex-col justify-end min-h-[200px]">
 		{#each consoleHistory as text}

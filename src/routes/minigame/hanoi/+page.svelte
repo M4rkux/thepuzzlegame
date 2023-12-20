@@ -1,9 +1,11 @@
 <script lang="ts">
-	const disks = [...new Array(6).keys()];
+	const diskAmount = 6;
+	const disks = [...new Array(diskAmount).keys()];
+	const poleElements: HTMLButtonElement[] = [];
 	let poles = [[...disks], [], []];
 	let currentDisk: number = -1;
 	let hoverPole: number = 0;
-	const poleElements: HTMLButtonElement[] = [];
+	$: isGameComplete = poles[2].length === diskAmount;
 
 	function handleClickDisk(poleIndex: number) {
 		if (currentDisk < 0) {
@@ -94,7 +96,7 @@
 	<div class="mx-auto flex flex-row relative">
 		{#if currentDisk > -1}
 			<div class="w-[230px] floating floating-{hoverPole}">
-				<button class="disk disk-{currentDisk}" />
+				<button class="disk disk-{currentDisk} {isGameComplete ? 'golden' : ''}" />
 			</div>
 		{/if}
 		{#each poles as poleDisks, poleIndex}
@@ -104,17 +106,17 @@
 				on:mouseenter={() => handleHoverPole(poleIndex)}
 			>
 				<button
-					class="pole {poleIndex === poles.length - 1 && 'pole-goal'} {currentDisk > -1 &&
-						'clickable'}"
+					class="pole {poleIndex === poles.length - 1 ? 'pole-goal' : ''} {currentDisk > -1 ? 
+						'clickable' : ''}"
 					name={`${poleIndex}`}
-					disabled={currentDisk === -1}
+					disabled={isGameComplete || currentDisk === -1}
 					on:click={() => handleClickPole(poleIndex)}
 					bind:this={poleElements[poleIndex]}
 				/>
 				{#each poleDisks as disk, i}
 					<button
-						class="disk disk-{disk} {currentDisk === -1 && i === 0 && 'clickable'}"
-						disabled={currentDisk > -1 || i > 0}
+						class="disk disk-{disk} {!isGameComplete && currentDisk === -1 && i === 0 ? 'clickable' : ''} {isGameComplete ? 'golden' : ''}"
+						disabled={isGameComplete || currentDisk > -1 || i > 0}
 						on:click={() => handleClickDisk(poleIndex)}
 					/>
 				{/each}
@@ -151,6 +153,10 @@
 
 		&-5 {
 			@apply bg-red-800 w-[210px];
+	}
+
+		&.golden {
+			@apply bg-yellow-300;
 		}
 	}
 
