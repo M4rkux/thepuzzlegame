@@ -23,7 +23,7 @@
 					<li><a href="/minigame/adjacent">Adjacent</a></li>
 					<li><a href="/minigame/hanoi">Hanoi</a></li>
 					<li><a href="/minigame/fox-and-chicken">Raposa e a galinha</a></li>
-					<li><a href="/minigame/matchers">Palitos (5 + 9 = 9)</a></li>
+					<li><a href="/minigame/matches">Palitos (5 + 9 = 9)</a></li>
 					<li><a href="/minigame/console">Console</a></li>
 				</ul>
 			</li>
