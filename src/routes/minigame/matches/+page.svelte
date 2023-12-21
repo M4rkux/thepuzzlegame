@@ -42,7 +42,7 @@
     {#if isResultCorrect}
       <h2>Parabéns, você completou o nível</h2>
     {:else}
-      <h2>A o resultado está incorreto</h2>
+      <h2>O resultado está incorreto</h2>
       <button on:click={reset} class="border-red-950 border-2 rounded-md bg-red-900 text-white px-4 py-2 hover:bg-red-800">Jogar novamente</button>
     {/if}
   {/if}

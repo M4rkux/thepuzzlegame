@@ -1,26 +1,18 @@
 <script lang="ts">
-  let foxElement: HTMLDivElement;
-  let cornElement: HTMLDivElement;
-  let chickenElement: HTMLDivElement;
-  let leftSide = [
-    {
-      isPlaced: true,
-      top: "2.5rem",
-      left: "7rem"
+  let foxElement: HTMLButtonElement;
+  let cornElement: HTMLButtonElement;
+  let chickenElement: HTMLButtonElement;
+  const foxObject = {
+    top: "112px",
+    leftSide: {
+      left: "40px",
     },
-    {
-      isPlaced: true,
-      top: "2.5rem",
-      left: "11rem"
-    },
-    {
-      isPlaced: true,
-      top: "2.5rem",
-      left: "15rem"
-    },
-  ]
+    rightSide: {
+      left: "600px",
+    }
+  }
 
-  function toggleElementOnBoat(element: HTMLDivElement) {
+  function toggleElementOnBoat(element: HTMLButtonElement) {
     element.style.top = element.style.top === "10rem" ? "5rem" : "10rem";
   }
 </script>
@@ -36,12 +28,11 @@
       <p>Se a galinha ficar só com o milho, ela irá comê-lo.</p>
       <p>Se a raposa ficar só com a galinha, ela irá comê-la.</p>
     </div>
-    <div class="relative w-[500px] h-[400px] bg-green-700 rounded-sm mx-auto">
-      <div class="fox" bind:this={foxElement} on:click={() => toggleElementOnBoat(foxElement)}></div>
-      <div class="corn" bind:this={cornElement} on:click={() => toggleElementOnBoat(cornElement)}></div>
-      <div class="chicken" bind:this={chickenElement} on:click={() => toggleElementOnBoat(chickenElement)}></div>
+    <div class="game">
+      <button class="fox" bind:this={foxElement} on:click={() => toggleElementOnBoat(foxElement)}>R</button>
+      <button class="corn" bind:this={cornElement} on:click={() => toggleElementOnBoat(cornElement)}>M</button>
+      <button class="chicken" bind:this={chickenElement} on:click={() => toggleElementOnBoat(chickenElement)}>G</button>
       <div class="farmer"></div>
-      <div class="river"></div>
       <button class="btn-play">Navegar</button>
     </div>
   </div>
@@ -49,7 +40,7 @@
 
 <style lang="scss">
   .chicken, .fox, .corn, .farmer {
-    @apply absolute w-[48px] h-[48px] rounded-full z-10;
+    @apply absolute w-[48px] h-[48px] rounded-full z-10 text-black;
     transition-property: left, top, translate;
     transition-duration: 250ms;
     transition-timing-function: ease-in;
@@ -77,14 +68,16 @@
     @apply left-40 top-40 bg-amber-800;
   }
 
-  .river {
-    @apply absolute w-[200px] h-full bg-blue-500 z-0 left-28 shadow-gray-500;
+  .game {
+    @apply relative w-[700px] h-[500px] rounded-sm mx-auto;
 
-    box-shadow: inset 0px 0 4px 2px green;
+    background-image: url("/imgs/river.jpeg");
+    background-position: center;
+    background-size: auto;
   }
 
   .btn-play {
-    @apply border-2 border-green-950 bg-green-900 text-white px-4 py-2 absolute left-1/3 top-2/3 rounded-md;
+    @apply border-2 border-green-950 bg-green-900 text-white px-4 py-2 absolute left-0 right-0 mx-auto w-[200px] top-2/3 rounded-md;
 
     &:hover {
       @apply bg-green-800;
