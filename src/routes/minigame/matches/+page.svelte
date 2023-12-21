@@ -29,9 +29,9 @@
     </div>
 <div class="flex flex-row text-9xl items-center gap-4">
   <MatchNumber bind:isGameComplete={isGameComplete} bind:isRemoving={isRemoving} bind:number={number1} />
-  <span class="w-[72px] text-center">+</span>
+  <span class="w-[64px] text-center">+</span>
   <MatchNumber bind:isGameComplete={isGameComplete} bind:isRemoving={isRemoving} bind:number={number2} />
-  <span class="w-[72px] text-center">=</span>
+  <span class="w-[64px] text-center">=</span>
   <MatchNumber bind:isGameComplete={isGameComplete} bind:isRemoving={isRemoving} bind:number={numberResult} />
 </div>
 </div>

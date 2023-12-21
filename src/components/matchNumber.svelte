@@ -107,7 +107,7 @@
 
 <style lang="scss">
 .seven-segment {
-  @apply grid w-[72px] h-[136px] gap-1;
+  @apply grid w-[64px] h-[128px];
 }
 
 .segment {
