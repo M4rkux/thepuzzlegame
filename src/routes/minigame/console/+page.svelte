@@ -17,8 +17,9 @@
 		exit: exitCommand
 	};
 	const birthDate = new Date("1992-01-15T00:00:00");
-	const password = "pizza1992";
+	const password = "1121051221229749575750";
 	const maxHistory = 100;
+	const encoder = new TextEncoder();
 
 	let consoleHistory: string[] = [];
 	let commandHistory: string[] = [];
@@ -157,7 +158,7 @@
 		if (command in commands) {
 			commands[command]();
 		} else if (isSolving) {
-			if (command === password) {
+			if (Array.from(encoder.encode(command)).join("") === password) {
 				addConsoleHistory(
 					`<span class="text-yellow-100">Parabéns! Você desbloqueou o nível.</span>`
 				);
