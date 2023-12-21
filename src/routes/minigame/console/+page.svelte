@@ -217,7 +217,7 @@
 		<h1 class="mb-4">Console</h1>
 		<div class="text-left">
 			<p>
-				Você precisa digitar o comando correto para desbloquear o nível, tente digitar <span class="font-bold text-yellow-100">help</span> para ver a lista de comandos.
+				Você precisa digitar o comando correto para desbloquear o nível, tente digitar <span class="font-bold bg-gray-700 text-yellow-100 font-mono px-1">help</span> para ver a lista de comandos.
 			</p>
 			<p>Você também pode utilizar o console para realizar operações aritméticas.</p>
 		</div>
