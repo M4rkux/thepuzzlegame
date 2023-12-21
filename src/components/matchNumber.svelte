@@ -32,7 +32,7 @@
   }
 </script>
 
-<div class="seven-segment {isGameComplete && 'isGameComplete'} {!isValidNumber ? 'animate-pulse' : ''}">
+<div class="seven-segment {isGameComplete && 'isGameComplete'} {!isValidNumber ? 'filter grayscale' : ''}">
   <button
     on:click={() => handleClick(0)}
     disabled={isGameComplete || ((!numberSeguments[0] && isRemoving) || (numberSeguments[0] && !isRemoving))}

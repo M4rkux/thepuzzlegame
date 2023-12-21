@@ -21,10 +21,10 @@
 				Criar cada mini game
 				<ul class="pl-4">
 					<li><a href="/minigame/adjacent">Adjacent</a></li>
-					<li><a href="/minigame/hanoi">Hanoi</a></li>
-					<li><a href="/minigame/crossing">Travessia</a></li>
-					<li><a href="/minigame/matches">Palitos (5 + 9 = 9)</a></li>
+					<li><a href="/minigame/matches">Palitos</a></li>
 					<li><a href="/minigame/console">Console</a></li>
+					<li><a href="/minigame/crossing">Travessia [WIP]</a></li>
+					<li><a href="/minigame/hanoi">Hanoi</a></li>
 				</ul>
 			</li>
 			<li>Salvar o progresso em local storage</li>

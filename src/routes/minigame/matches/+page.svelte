@@ -37,13 +37,13 @@
 </div>
 </div>
 
-<div>
+<div class="flex flex-col">
   {#if isGameComplete}
     {#if isResultCorrect}
       <h2 class="text-center mt-4 text-green-500">Parabéns, você completou o nível</h2>
     {:else}
       <h2 class="text-center">O resultado está incorreto</h2>
-      <button on:click={reset} class="border-red-950 border-2 rounded-md bg-red-900 text-white px-4 py-2 hover:bg-red-800">Jogar novamente</button>
+      <button on:click={reset} class="border-red-950 border-2 rounded-md bg-red-900 text-white px-4 py-2 mx-auto hover:bg-red-800">Jogar novamente</button>
     {/if}
   {/if}
 </div>
