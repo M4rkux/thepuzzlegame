@@ -221,7 +221,9 @@
 			</p>
 			<p>Você também pode utilizar o console para realizar operações aritméticas.</p>
 		</div>
-		<div class="mt-4 rounded-sm bg-gray-700 p-1 font-mono border-b-2 border-gray-500 min-w-[480px] w-full">
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="mt-4 rounded-sm bg-gray-700 p-1 font-mono border-b-2 border-gray-500 min-w-[480px] w-full" on:click={() => commandElement.focus()}>
 			<div class="flex flex-col justify-end min-h-[200px]">
 				{#each consoleHistory as text}
 					<p>{@html text}</p>
